@@ -9,7 +9,7 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addToDoHandler = (todoText: string) => {
-    console.log(todoText);
+    // console.log(todoText);
     const newTodo = new Todo(todoText);
 
     setTodos((currentState) => {
@@ -17,10 +17,16 @@ function App() {
     });
   };
 
+  const removeTodoHandler = (todoID: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== todoID);
+    });
+  };
+
   return (
     <div className="App">
       <NewTodo onAddTodo={addToDoHandler} />
-      <Todos items={todos} />
+      <Todos items={todos} onRemoveTodo={removeTodoHandler} />
     </div>
   );
 }
