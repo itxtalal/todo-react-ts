@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import Todo from "../models/Todo";
 import TodoItem from "./TodoItem";
+import { TodosContext } from "../store/todos-context";
 import classes from "./Todos.module.css";
 
 //! Type Annotation
@@ -10,16 +10,16 @@ import classes from "./Todos.module.css";
 //* Here we are merging items: string[] with the generic type having props.children
 
 //? Describe your custom props <{ here }> for FC
-const Todos: React.FC<{ items: Todo[]; onRemoveTodo: (id: string) => void }> = (
-  props
-) => {
+const Todos: React.FC = () => {
+  const todosCtx = useContext(TodosContext);
+
   return (
     <ul className={classes.todos}>
-      {props.items.map((item) => (
+      {todosCtx.items.map((item) => (
         <TodoItem
           key={item.id}
           text={item.text}
-          onRemoveTodo={props.onRemoveTodo.bind(null, item.id)}
+          onRemoveTodo={todosCtx.removeTodo.bind(null, item.id)}
         />
       ))}
     </ul>
