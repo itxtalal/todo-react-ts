@@ -2,6 +2,7 @@ import React from "react";
 
 import Todo from "../models/Todo";
 import TodoItem from "./TodoItem";
+import classes from "./Todos.module.css";
 
 //! Type Annotation
 //* FC means it is a Functional Component, it has props.children valid
@@ -11,7 +12,7 @@ import TodoItem from "./TodoItem";
 //? Describe your custom props <{ here }> for FC
 const Todos: React.FC<{ items: Todo[] }> = (props) => {
   return (
-    <ul>
+    <ul className={classes.todos}>
       {props.items.map((item) => (
         <TodoItem key={item.id} text={item.text} />
       ))}
